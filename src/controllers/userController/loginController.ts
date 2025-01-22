@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import httpStatus from "http-status";
-import { LoginService } from "../../service/loginservice";
+import { LoginService } from "../../service/userService/loginService";
 
 async function loginPost(req: Request, res: Response) {
   const { mode, password } = req.body;
