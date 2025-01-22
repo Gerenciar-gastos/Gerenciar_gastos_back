@@ -38,12 +38,10 @@ export const RegisterSchema = Joi.object({
         }),
 
     cpf: Joi.string()
-        .length(11)
-        .pattern(/^\d+$/)
+        .pattern(/^\d{3}\.\d{3}\.\d{3}-\d{2}$/)
         .required()
         .messages({
-            'string.length': 'O CPF deve conter exatamente 11 dígitos.',
-            'string.pattern.base': 'O CPF deve conter apenas números.',
+            'string.pattern.base': 'O CPF deve estar no formato 123.456.789-01.',
             'any.required': 'O campo CPF é obrigatório.',
         }),
 });
