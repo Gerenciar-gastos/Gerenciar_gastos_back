@@ -1,7 +1,7 @@
 import * as jwt from "jsonwebtoken";
 import bcrypt from 'bcrypt';
 import { sessionRepository } from "@/repositories/sessionsRepository";
-import { loginRepository } from "@/repositories/loginRepository";
+import { loginRepository } from "@/repositories/userRepository/loginRepository";
 import { invalidCredentialsError } from "@/erros/invalidCredentialsError";
 
 async function loginPost({ mode, password }) {

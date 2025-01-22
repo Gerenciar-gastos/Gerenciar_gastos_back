@@ -1,5 +1,6 @@
 import bcrypt from 'bcrypt';
 import { invalidCredentialsError } from "@/erros/invalidCredentialsError";
+import { registerRepository } from '@/repositories/userRepository/registerRepository';
 
 async function registerPost({ name, password, cpf, email }) {
     const registerEmail = await registerRepository.searchingEmail(email);
@@ -14,7 +15,7 @@ async function registerPost({ name, password, cpf, email }) {
 
     const hashedPassword = await bcrypt.hash(password, 12)
 
-    const register = await registerRepository.registerPost({ name, hashedPassword, cpf, email });
+    const register = await registerRepository.registerPost( name, hashedPassword, cpf, email );
     
     return register;
 }
