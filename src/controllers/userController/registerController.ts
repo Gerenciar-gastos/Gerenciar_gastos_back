@@ -6,7 +6,7 @@ async function registerPost(req: Request, res: Response) {
     const { name, password, cpf, email } = req.body;
     const user = await RegisterService.registerPost({ name, password, cpf, email });
 
-    res.status(httpStatus.OK).send(user);
+    res.status(httpStatus.CREATED).send(user);
 }
 
 export const registerController = {
