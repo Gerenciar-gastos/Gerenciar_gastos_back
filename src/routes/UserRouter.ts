@@ -4,9 +4,10 @@ import { validateBody } from '../middlewares/validationMiddlewere';
 import { LoginSchema } from '../schemas/loginSchemas';
 import { loginController } from '../controllers/loginController';
 
-const LoginRouter = Router();
+const UserRouter = Router();
 
-LoginRouter.post('/', validateBody(LoginSchema as ObjectSchema<any>), loginController.loginPost);
+UserRouter.post('/login', validateBody(LoginSchema as ObjectSchema<any>), loginController.loginPost);
+UserRouter.post('/register', validateBody(LoginSchema as ObjectSchema<any>), loginController.loginPost);
 
 
-export { LoginRouter };
+export { UserRouter };

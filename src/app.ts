@@ -4,7 +4,7 @@ import express, { json, Request, Response, Express } from "express";
 import "express-async-errors";
 import httpStatus from "http-status";
 import errorHandlingMiddleware from "./middlewares/errorHandlingMiddleware";
-import { LoginRouter } from "./routes";
+import { UserRouter } from "./routes";
 
 dotenv.config();
 
@@ -13,7 +13,7 @@ const app = express();
 app.use(cors());
 app.use(json());
 app
-    .use("/login", LoginRouter)
+    .use("/user", UserRouter)
     .get("/health", (req: Request, res: Response) => {
         return res.status(httpStatus.OK).send("Ok running! ");
     })
