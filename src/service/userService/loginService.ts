@@ -16,7 +16,7 @@ async function loginPost({ mode, password }) {
     throw invalidCredentialsError("senha não corresposnde");
   }
 
-  const token = jwt.sign({ userId: login.id, email: login.email }, process.env.JWT_SECRET);
+  const token = jwt.sign( { userId: login.id, email: login.email }, process.env.JWT_SECRET,{ expiresIn: '2d' }  ); 
   const session = await sessionRepository.sessionToken(token, login.id);
   const list = {
     email: login.email,

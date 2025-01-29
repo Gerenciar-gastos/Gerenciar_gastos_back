@@ -8,14 +8,15 @@ datasource db {
 }
 
 model Users {
-  id                      Int                       @id @default(autoincrement())
-  email                   String                    @unique @db.VarChar(255)
-  cpf                     String                    @unique
-  password                String                    @db.VarChar(255)
-  name                    String                    @db.VarChar(50)
-  createdAt               DateTime                  @default(now())
-  updatedAt               DateTime                  @updatedAt
-  sessions                Session[]                 @relation()
+  id        Int       @id @default(autoincrement())
+  email     String    @unique @db.VarChar(255)
+  cpf       String    @unique
+  password  String    @db.VarChar(255)
+  name      String    @db.VarChar(50)
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  sessions  Session[] @relation()
+  Month     Month[]
 
   @@map("users")
 }
@@ -31,3 +32,34 @@ model Session {
   @@map("session")
 }
 
+model Month {
+  id         Int     @id @default(autoincrement())
+  name       String  @db.VarChar(20)
+  totalFunds Decimal @default(0.00)
+  totalSpent Decimal @default(0.00)
+  card       Card[]
+  userId     Int
+  user       Users   @relation(fields: [userId], references: [id])
+
+  @@map("month")
+}
+
+model Card {
+  id      Int       @id @default(autoincrement())
+  name    String    @db.VarChar(50)
+  month   Month     @relation(fields: [monthId], references: [id], onDelete: Cascade)
+  monthId Int
+  expense Expense[]
+
+  @@map("card")
+}
+
+model Expense {
+  id     Int     @id @default(autoincrement())
+  card   Card    @relation(fields: [cardId], references: [id], onDelete: Cascade)
+  cardId Int
+  name   String  @db.VarChar(100)
+  value  Decimal
+
+  @@map("expense")
+}
