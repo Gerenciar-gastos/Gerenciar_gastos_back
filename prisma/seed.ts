@@ -1,34 +1,104 @@
-import prisma from "../src/database/database"
+import { PrismaClient } from '@prisma/client';
+
+const prisma = new PrismaClient();
 
 async function main() {
+    console.log('Iniciando o seed...');
+
     await prisma.users.createMany({
-        data: [{
-            email: 'm@gmail.com',
-            cpf: "555.555.555-57",
-            password: '$2b$12$RBPyrSMsrg30WlriZcmfheYQkZ/jC0xwx4S2zEv6MqbFuV1T9jDAu',
-            name: "monique",
-        },
-        {
-            email: 'm2@gmail.com',
-            cpf: "555.555.555-55",
-            password: '$2b$12$RBPyrSMsrg30WlriZcmfheYQkZ/jC0xwx4S2zEv6MqbFuV1T9jDAu',
-            name: "andressa",
-        },
-        {
-            email: 'm3@gmail.com',
-            cpf: "555.555.555-54",
-            password: '$2b$12$RBPyrSMsrg30WlriZcmfheYQkZ/jC0xwx4S2zEv6MqbFuV1T9jDAu',
-            name: "patrick",
-        },]
+        data: [
+            {
+                email: 'm@gmail.com',
+                cpf: '555.555.555-57',
+                password: '$2b$12$RBPyrSMsrg30WlriZcmfheYQkZ/jC0xwx4S2zEv6MqbFuV1T9jDAu', 
+                name: 'Monique',
+            },
+            {
+                email: 'm2@gmail.com',
+                cpf: '555.555.555-55',
+                password: '$2b$12$RBPyrSMsrg30WlriZcmfheYQkZ/jC0xwx4S2zEv6MqbFuV1T9jDAu',
+                name: 'Andressa',
+            },
+            {
+                email: 'm3@gmail.com',
+                cpf: '555.555.555-54',
+                password: '$2b$12$RBPyrSMsrg30WlriZcmfheYQkZ/jC0xwx4S2zEv6MqbFuV1T9jDAu',
+                name: 'Patrick',
+            },
+        ],
+        skipDuplicates: true, 
     });
+
+    const user = await prisma.users.upsert({
+        where: { email: 'usuario1@email.com' },
+        update: {},
+        create: {
+            email: 'usuario1@email.com',
+            cpf: '123.456.789-00',
+            password: '$2b$12$RBPyrSMsrg30WlriZcmfheYQkZ/jC0xwx4S2zEv6MqbFuV1T9jDAu',
+            name: 'Usuário Teste 1',
+        },
+    });
+
+    console.log('Usuário criado:', user);
+
+    await prisma.session.create({
+        data: {
+            userId: user.id,
+            token: 'token_usuario_1',
+        },
+    });
+
+    console.log('Sessão criada para usuário:', user.email);
+
+    await prisma.month.createMany({
+        data: [
+            { name: 'Janeiro', totalFunds: 5000.0, totalSpent: 1200.0, userId: user.id },
+            { name: 'Fevereiro', totalFunds: 6000.0, totalSpent: 900.0, userId: user.id },
+        ],
+    });
+
+    console.log('Meses criados para usuário:', user.email);
+
+    const months = await prisma.month.findMany({ where: { userId: user.id } });
+
+    for (const month of months) {
+        const card = await prisma.card.create({
+            data: {
+                name: month.name === 'Janeiro' ? 'Cartão Visa' : 'Cartão Mastercard',
+                monthId: month.id,
+            },
+        });
+
+        console.log(`Cartão ${card.name} criado para ${month.name}`);
+
+        const expenses = month.name === 'Janeiro'
+            ? [
+                { name: 'Supermercado', value: 300.0, cardId: card.id },
+                { name: 'Combustível', value: 200.0, cardId: card.id },
+            ]
+            : [
+                { name: 'Cinema', value: 100.0, cardId: card.id },
+                { name: 'Restaurante', value: 250.0, cardId: card.id },
+            ];
+
+        await prisma.expense.createMany({
+            data: expenses,
+        });
+
+        console.log(`Despesas criadas para ${card.name}:`, expenses);
+    }
+
+    console.log('Seed finalizado com sucesso!');
 }
+
 
 main()
     .then(async () => {
         await prisma.$disconnect();
     })
     .catch(async (e) => {
-        console.log(e);
+        console.error('Erro ao executar o seed:', e);
         await prisma.$disconnect();
         process.exit(1);
     });

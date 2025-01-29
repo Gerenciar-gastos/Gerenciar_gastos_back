@@ -6,6 +6,6 @@ import { HomeController } from '@/controllers/homeController';
 const homeRouter = Router();
 
 homeRouter
-    .get('/', authenticateToken, HomeController.homeGet)
+    .get('/', authenticateToken, HomeController.HomeGet)
 
 export { homeRouter };
