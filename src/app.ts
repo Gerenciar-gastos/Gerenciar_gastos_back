@@ -5,6 +5,7 @@ import "express-async-errors";
 import httpStatus from "http-status";
 import errorHandlingMiddleware from "./middlewares/errorHandlingMiddleware";
 import { UserRouter } from "./routes";
+import { homeRouter } from "./routes/homeRouter";
 
 dotenv.config();
 
@@ -13,10 +14,11 @@ const app = express();
 app.use(cors());
 app.use(json());
 app
-    .use("/user", UserRouter)
     .get("/health", (req: Request, res: Response) => {
         return res.status(httpStatus.OK).send("Ok running! ");
     })
+    .use("/user", UserRouter)
+    .use("/home", homeRouter)
 
 app.use(errorHandlingMiddleware);
 
