@@ -1,8 +1,11 @@
+import prisma from "@/database/database";
+
+
 async function HomeGet(userId: number) {
-    return this.prisma.users.findUnique({
+    const home = await prisma.users.findUnique({
         where: { id: userId },
         include: {
-            month: {
+            Month: {
                 include: {
                     card: {
                         include: {
@@ -13,6 +16,7 @@ async function HomeGet(userId: number) {
             },
         },
     });
+    return home
 }
 
 export const HomeRepository = {
