@@ -36,5 +36,5 @@ async function UserExists(userId: number) {
 }
 
 export const HomeRepository = {
-    HomeGet, MonthPost, UserExists
+    HomeGet, MonthPost, UserExists,
 };
