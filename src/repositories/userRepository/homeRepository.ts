@@ -28,6 +28,13 @@ async function MonthPost(month: string, totalFunds: Decimal) {
     })
 }
 
+async function UserExists(userId: number) {
+    const home = await prisma.users.findUnique({
+        where: { id: userId },
+    });
+    return home
+}
+
 export const HomeRepository = {
-    HomeGet, MonthPost
+    HomeGet, MonthPost, UserExists
 };
