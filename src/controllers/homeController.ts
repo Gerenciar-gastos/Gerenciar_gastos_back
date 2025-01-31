@@ -9,6 +9,11 @@ async function HomeGet(req: Request, res: Response) {
     res.status(httpStatus.OK).send(home);
 }
 
+async function MonthPost(req: Request, res: Response) {
+    const { month } = req.body;
+    const monthHome = await HomeService.MonthPost(month);
+}
+
 export const HomeController = {
-    HomeGet
+    HomeGet, MonthPost
 };

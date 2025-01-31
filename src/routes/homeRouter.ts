@@ -7,6 +7,6 @@ const homeRouter = Router();
 
 homeRouter
     .get('/', authenticateToken, HomeController.HomeGet)
-    .post('/', authenticateToken, HomeController.MonthPost)
+    .post('/month', authenticateToken, HomeController.MonthPost)
 
 export { homeRouter };
