@@ -10,9 +10,9 @@ async function HomeGet(req: Request, res: Response) {
 }
 
 async function MonthPost(req: Request, res: Response) {
-    const { month, totalFunds } = req.body;
+    const { name, totalFunds } = req.body;
     const { userId } = req;
-    const monthHome = await HomeService.MonthPost(month, totalFunds, userId);
+    const monthHome = await HomeService.MonthPost(name, totalFunds, userId);
     res.status(httpStatus.CREATED).send(monthHome);
 }
 

@@ -12,12 +12,12 @@ async function HomeGet(userId: number) {
     return home;
 }
 
-async function MonthPost(month: string, totalFunds: Decimal, userId: number) {
+async function MonthPost(name: string, totalFunds: number, userId: number) {
     const user = await HomeRepository.UserExists(userId)
     if(!user){
         throw unauthorizedError()
     }
-    const homeMonth = await HomeRepository.MonthPost(month, totalFunds, userId);
+    const homeMonth = await HomeRepository.MonthPost(name, totalFunds, userId);
     return homeMonth
 }
 

@@ -19,13 +19,17 @@ async function HomeGet(userId: number) {
     return home
 }
 
-async function MonthPost(month: string, totalFunds: Decimal) {
+async function MonthPost(name: string, totalFunds: number, userId: number) {
     const homeMonth = await prisma.month.create({
-        data:{
-            name: month,
+        data: {
+            user: {
+                connect: { id: userId }
+            },
+            name,
             totalFunds
         }
     })
+    return homeMonth
 }
 
 async function UserExists(userId: number) {

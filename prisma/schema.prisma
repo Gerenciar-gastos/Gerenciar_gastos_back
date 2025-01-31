@@ -35,8 +35,8 @@ model Session {
 model Month {
   id         Int     @id @default(autoincrement())
   name       String  @db.VarChar(20)
-  totalFunds Int @default(0.00)
-  totalSpent Int @default(0.00)
+  totalFunds Float @default(0.00)
+  totalSpent Float @default(0.00)
   card       Card[]
   userId     Int
   user       Users   @relation(fields: [userId], references: [id])
@@ -59,7 +59,7 @@ model Expense {
   card   Card    @relation(fields: [cardId], references: [id], onDelete: Cascade)
   cardId Int
   name   String  @db.VarChar(100)
-  value  Decimal
+  value  Float
 
   @@map("expense")
 }
