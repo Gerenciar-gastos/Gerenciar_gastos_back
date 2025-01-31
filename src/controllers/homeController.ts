@@ -12,6 +12,7 @@ async function HomeGet(req: Request, res: Response) {
 async function MonthPost(req: Request, res: Response) {
     const { month } = req.body;
     const monthHome = await HomeService.MonthPost(month);
+    res.status(httpStatus.CREATED).send(monthHome);
 }
 
 export const HomeController = {

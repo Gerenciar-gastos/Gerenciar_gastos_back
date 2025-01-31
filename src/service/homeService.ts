@@ -10,6 +10,11 @@ async function HomeGet(userId: number) {
     return home;
 }
 
+async function MonthPost(month: string) {
+    const homeMonth = await HomeRepository.MonthPost(month);
+    return homeMonth
+}
+
 export const HomeService = {
-    HomeGet
+    HomeGet, MonthPost
 };
