@@ -19,6 +19,15 @@ async function HomeGet(userId: number) {
     return home
 }
 
+async function MonthPost(month: string, totalFunds: Decimal) {
+    const homeMonth = await prisma.month.create({
+        data:{
+            name: month,
+            totalFunds
+        }
+    })
+}
+
 export const HomeRepository = {
-    HomeGet
+    HomeGet, MonthPost
 };

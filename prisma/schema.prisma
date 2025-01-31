@@ -35,8 +35,8 @@ model Session {
 model Month {
   id         Int     @id @default(autoincrement())
   name       String  @db.VarChar(20)
-  totalFunds Decimal @default(0.00)
-  totalSpent Decimal @default(0.00)
+  totalFunds Int @default(0.00)
+  totalSpent Int @default(0.00)
   card       Card[]
   userId     Int
   user       Users   @relation(fields: [userId], references: [id])

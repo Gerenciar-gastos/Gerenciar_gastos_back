@@ -1,5 +1,6 @@
 import { invalidCredentialsError } from "@/erros/invalidCredentialsError";
 import { HomeRepository } from "@/repositories/userRepository/homeRepository";
+import { Decimal } from "@prisma/client/runtime/library";
 
 async function HomeGet(userId: number) {
     const home = await HomeRepository.HomeGet(userId);
@@ -10,8 +11,8 @@ async function HomeGet(userId: number) {
     return home;
 }
 
-async function MonthPost(month: string) {
-    const homeMonth = await HomeRepository.MonthPost(month);
+async function MonthPost(month: string, totalFunds: Decimal) {
+    const homeMonth = await HomeRepository.MonthPost(month, totalFunds);
     return homeMonth
 }
 
