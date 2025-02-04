@@ -3,7 +3,6 @@ import { PrismaClient } from '@prisma/client';
 const prisma = new PrismaClient();
 
 async function main() {
-    console.log('Iniciando o seed...');
 
     await prisma.users.createMany({
         data: [
@@ -40,7 +39,6 @@ async function main() {
         },
     });
 
-    console.log('Usuário criado:', user);
 
     await prisma.session.create({
         data: {
@@ -49,7 +47,6 @@ async function main() {
         },
     });
 
-    console.log('Sessão criada para usuário:', user.email);
 
     await prisma.month.createMany({
         data: [
@@ -58,7 +55,6 @@ async function main() {
         ],
     });
 
-    console.log('Meses criados para usuário:', user.email);
 
     const months = await prisma.month.findMany({ where: { userId: user.id } });
 
@@ -70,7 +66,6 @@ async function main() {
             },
         });
 
-        console.log(`Cartão ${card.name} criado para ${month.name}`);
 
         const expenses = month.name === 'Janeiro'
             ? [
@@ -86,10 +81,8 @@ async function main() {
             data: expenses,
         });
 
-        console.log(`Despesas criadas para ${card.name}:`, expenses);
     }
 
-    console.log('Seed finalizado com sucesso!');
 }
 
 
