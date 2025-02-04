@@ -69,12 +69,12 @@ async function main() {
 
         const expenses = month.name === 'Janeiro'
             ? [
-                { name: 'Supermercado', value: 300.0, cardId: card.id },
-                { name: 'Combustível', value: 200.0, cardId: card.id },
+            { name: 'Supermercado', person: "Monique", value: 300.0, cardId: card.id },
+                { name: 'Combustível', person: "Monique", value: 200.0, cardId: card.id },
             ]
             : [
-                { name: 'Cinema', value: 100.0, cardId: card.id },
-                { name: 'Restaurante', value: 250.0, cardId: card.id },
+                { name: 'Cinema', person: "Monique", value: 100.0, cardId: card.id },
+                { name: 'Restaurante', person: "Monique", value: 250.0, cardId: card.id },
             ];
 
         await prisma.expense.createMany({

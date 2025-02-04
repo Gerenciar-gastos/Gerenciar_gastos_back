@@ -9,7 +9,15 @@ async function HomeGet(userId: number) {
                 include: {
                     card: {
                         include: {
-                            expense: true,
+                            expense: {
+                                select: {
+                                    id: true,
+                                    cardId: true,
+                                    name: true,
+                                    value: true,
+                                    person: true,
+                                },
+                            },
                         },
                     },
                 },
