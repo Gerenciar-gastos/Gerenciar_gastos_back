@@ -1,7 +1,6 @@
 import { invalidCredentialsError } from "@/erros/invalidCredentialsError";
 import { unauthorizedError } from "@/erros/unauthorizedRrror";
-import { HomeRepository } from "@/repositories/userRepository/homeRepository";
-import { Decimal } from "@prisma/client/runtime/library";
+import { HomeRepository } from "@/repositories/homeRepository";
 
 async function HomeGet(userId: number) {
     const home = await HomeRepository.HomeGet(userId);

@@ -6,6 +6,6 @@ import { Router } from 'express';
 const cardRouter = Router();
 
 cardRouter
-    .post('/', authenticateToken, CardController.cardPost)
+    .post('/post', authenticateToken, CardController.cardPost)
 
 export { cardRouter };
