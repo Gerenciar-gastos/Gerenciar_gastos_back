@@ -1,14 +1,13 @@
-import { HomeService } from "@/service/homeService";
+import { CardService } from "@/service/cardService";
 import { Request, Response } from "express";
 import httpStatus from "http-status";
 
 
-
 async function cardPost(req: Request, res: Response) {
-    const { name, totalFunds } = req.body;
+    const { name } = req.body;
     const { userId } = req;
-    const monthHome = await CardService.cardPost(name, totalFunds, userId);
-    res.status(httpStatus.CREATED).send(monthHome);
+    const card = await CardService.cardPost(name, userId);
+    res.status(httpStatus.CREATED).send(card);
 }
 
 export const CardController = {
