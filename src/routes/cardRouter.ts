@@ -1,3 +1,4 @@
+import { CardController } from '@/controllers/cardController';
 import { authenticateToken } from '@/middlewares/authenticationTokenMiddleware';
 import { Router } from 'express';
 
@@ -5,6 +6,6 @@ import { Router } from 'express';
 const cardRouter = Router();
 
 cardRouter
-    .post('/', authenticateToken, CardController.CardPost)
+    .post('/', authenticateToken, CardController.cardPost)
 
 export { cardRouter };
