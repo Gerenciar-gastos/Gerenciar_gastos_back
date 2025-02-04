@@ -6,6 +6,7 @@ import httpStatus from "http-status";
 import errorHandlingMiddleware from "./middlewares/errorHandlingMiddleware";
 import { UserRouter } from "./routes";
 import { homeRouter } from "./routes/homeRouter";
+import { cardRouter } from "./routes/cardRouter";
 
 dotenv.config();
 
@@ -19,6 +20,8 @@ app
     })
     .use("/user", UserRouter)
     .use("/home", homeRouter)
+    .use("/card", cardRouter)
+
 
 app.use(errorHandlingMiddleware);
 

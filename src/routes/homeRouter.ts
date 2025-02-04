@@ -8,6 +8,5 @@ const homeRouter = Router();
 homeRouter
     .get('/', authenticateToken, HomeController.HomeGet)
     .post('/month', authenticateToken, HomeController.MonthPost)
-    .post('/card', authenticateToken, HomeController.CardPost)
 
 export { homeRouter };
