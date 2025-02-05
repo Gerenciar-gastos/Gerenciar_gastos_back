@@ -1,10 +1,10 @@
-import { RegisterSchema } from '@/schemas/registerSchemas';
 import { Router } from 'express';
 import { ObjectSchema } from 'joi';
 import { loginController } from '../controllers/userController/loginController';
 import { validateBody } from '../middlewares/validationMiddlewere';
 import { LoginSchema } from '../schemas/loginSchemas';
 import { registerController } from '@/controllers/userController/registerController';
+import { RegisterSchema } from '@/schemas/registerSchemas';
 
 const UserRouter = Router();
 
