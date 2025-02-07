@@ -8,7 +8,7 @@ import { RegisterMonthSchema } from '@/schemas/HomeMonthSchemas';
 const homeRouter = Router();
 
 homeRouter
-    .get('/', authenticateToken, validateBody(RegisterMonthSchema), HomeController.HomeGet)
-    .post('/month', authenticateToken, HomeController.MonthPost)
+    .get('/', authenticateToken,  HomeController.HomeGet)
+    .post('/month', authenticateToken, validateBody(RegisterMonthSchema), HomeController.MonthPost)
 
 export { homeRouter };
