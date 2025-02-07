@@ -40,6 +40,8 @@ model Month {
   card       Card[]
   userId     Int
   user       Users   @relation(fields: [userId], references: [id])
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   @@map("month")
 }
