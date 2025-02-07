@@ -4,11 +4,18 @@ import prisma from "@/database/database";
 async function HomeGet(userId: number) {
     const home = await prisma.users.findUnique({
         where: { id: userId },
-        include: {
+        select: {
             Month: {
-                include: {
+                select: {
+                    id: true,
+                    name: true,
+                    totalFunds: true,
+                    totalSpent: true,
+                    createdAt: true,
                     card: {
-                        include: {
+                        select: {
+                            id: true,
+                            name: true,
                             expense: {
                                 select: {
                                     id: true,
@@ -24,8 +31,9 @@ async function HomeGet(userId: number) {
             },
         },
     });
-    return home
+    return home;
 }
+
 
 async function MonthPost(name: string, totalFunds: number, userId: number) {
     const homeMonth = await prisma.month.create({
