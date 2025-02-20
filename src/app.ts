@@ -7,6 +7,7 @@ import errorHandlingMiddleware from "./middlewares/errorHandlingMiddleware";
 import { UserRouter } from "./routes";
 import { homeRouter } from "./routes/homeRouter";
 import { cardRouter } from "./routes/cardRouter";
+import { addexpensesRouter } from "./routes/addexpensesRouter";
 
 dotenv.config();
 
@@ -21,6 +22,7 @@ app
     .use("/user", UserRouter)
     .use("/home", homeRouter)
     .use("/card", cardRouter)
+    .use("/addexpenses", addexpensesRouter)
 
 
 app.use(errorHandlingMiddleware);
