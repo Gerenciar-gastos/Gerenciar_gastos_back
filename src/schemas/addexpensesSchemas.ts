@@ -29,4 +29,13 @@ const containerSchema = Joi.object({
     }),
 });
 
-export const validatePurchases = Joi.array().items(containerSchema).min(1).required();
+export const validatePurchases = Joi.object({
+    monthId: Joi.number().integer().required().messages({
+        "number.base": "O campo 'monthId' deve ser um número",
+        "number.integer": "O campo 'monthId' deve ser um número inteiro",
+        "any.required": "O campo 'monthId' é obrigatório",
+    }),
+    containers: Joi.array().items(containerSchema).min(1).required().messages({
+        "array.min": "Deve haver pelo menos um container",
+    }),
+});
