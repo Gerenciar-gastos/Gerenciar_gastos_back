@@ -8,13 +8,13 @@ async function addexpensesPost(monthId: number, containers: any[] ) {
 }
 
 async function deleteExpensesDelete(id: number) {
-    const expenseExists = expensesRepository.expenseExists(id)
-    if(!expenseExists){
+    const expenseExists = await expensesRepository.expenseExists(id)
+    if (expenseExists.length === 0){
         throw invalidCredentialsError("despesa não cadastrada");
+    }else{
+        const expenses = await expensesRepository.deleteExpensesDelete(id);
+        return expenses
     }
-   
-
-    return expenseExists
 }
 
 

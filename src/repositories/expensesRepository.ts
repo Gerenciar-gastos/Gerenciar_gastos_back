@@ -45,6 +45,17 @@ async function expenseExists(id:number) {
     })
     return expense
 }
+
+async function deleteExpensesDelete(id: number) {
+    const expense = await prisma.expense.deleteMany({
+        where: {
+            id
+        }
+    })
+    return expense
+}
+
+
 export const expensesRepository = {
-    addexpensesPost, expenseExists
+    addexpensesPost, expenseExists, deleteExpensesDelete
 };
