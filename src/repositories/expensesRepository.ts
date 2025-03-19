@@ -33,10 +33,18 @@ async function addexpensesPost(monthId: number, containers: any[]) {
             expenses: createdExpenses,
         });
     }
-
+    console.log(createdCards)
     return createdCards;
 }
 
-export const addexpensesRepository = {
-    addexpensesPost,
+async function expenseExists(id:number) {
+    const expense = await prisma.expense.findMany({
+        where:{
+            id
+        }
+    })
+    return expense
+}
+export const expensesRepository = {
+    addexpensesPost, expenseExists
 };
