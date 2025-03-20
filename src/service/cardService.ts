@@ -3,12 +3,12 @@ import { HomeRepository } from "@/repositories/homeRepository";
 import { CardRepository } from "@/repositories/userRepository/cardRepository";
 
 
-async function cardPost(name: string,  userId: number) {
+async function cardPost(name: string, userId: number) {
     const user = await HomeRepository.UserExists(userId)
     if (!user) {
         throw unauthorizedError()
     }
-    const month= await CardRepository.ifMonthExists(userId)
+    const month = await CardRepository.ifMonthExists(userId)
     if (!month) {
         throw unauthorizedType("Mês não registrado")
     }
@@ -17,6 +17,11 @@ async function cardPost(name: string,  userId: number) {
     return card
 }
 
+async function cardDelete(id: number) {
+    const cardExiste = await CardRepository.cardExiste(id);
+    console.log(cardExiste)
+}
+
 export const CardService = {
-    cardPost
+    cardPost, cardDelete
 };
