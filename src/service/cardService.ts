@@ -18,8 +18,11 @@ async function cardPost(name: string, userId: number) {
 }
 
 async function cardDelete(id: number) {
-    const cardExiste = await CardRepository.cardExiste(id);
-    console.log(cardExiste)
+    const cardExists = await CardRepository.cardExists(id);
+    if(cardExists.length === 0){
+        throw unauthorizedType("Cartão não registrado no banco de dados")
+    }
+    console.log(cardExists)
 }
 
 export const CardService = {
