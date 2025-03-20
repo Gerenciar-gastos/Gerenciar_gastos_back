@@ -7,5 +7,6 @@ const cardRouter = Router();
 
 cardRouter
     .post('/post', authenticateToken, CardController.cardPost)
+    .delete('/:id', authenticateToken, CardController.cardDelete)
 
 export { cardRouter };

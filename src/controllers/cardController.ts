@@ -10,6 +10,12 @@ async function cardPost(req: Request, res: Response) {
     res.status(httpStatus.CREATED).send(card);
 }
 
+async function cardDelete(req: Request, res: Response) {
+    const id = Number(req.params.id);
+    const card = await CardService.cardDelete(id);
+    res.status(httpStatus.OK).send(card);
+}
+
 export const CardController = {
-    cardPost
+    cardPost, cardDelete
 };
