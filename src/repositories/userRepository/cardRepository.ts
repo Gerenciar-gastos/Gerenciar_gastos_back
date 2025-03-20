@@ -21,16 +21,23 @@ async function ifMonthExists(userId: number) {
     return month
 }
 
-async function cardExists(id:number) {
+async function cardExists(id: number) {
     const card = await prisma.card.findMany({
-        where:{
+        where: {
             id
         }
     })
     return card
 }
 
+async function cardDelete(id: number) {
+    const card = await prisma.card.delete({
+        where: {
+            id
+        }
+    })
+}
 
 export const CardRepository = {
-    cardPost, ifMonthExists, cardExists
+    cardPost, ifMonthExists, cardExists, cardDelete
 };

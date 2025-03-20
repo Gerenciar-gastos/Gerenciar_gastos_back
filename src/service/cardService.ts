@@ -22,7 +22,8 @@ async function cardDelete(id: number) {
     if(cardExists.length === 0){
         throw unauthorizedType("Cartão não registrado no banco de dados")
     }
-    console.log(cardExists)
+    const card = await CardRepository.cardDelete(id)
+    return card
 }
 
 export const CardService = {
