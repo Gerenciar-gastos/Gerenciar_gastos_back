@@ -18,9 +18,11 @@ async function deleteExpensesDelete(id: number) {
     }
 }
 
-async function updateExpesesPut(expenses: Expense[], newCardName: string | null) {
-    
-    const updateexpenses = await expensesRepository.updateExpesesPut(expenses, newCardName);
+async function updateExpesesPut(expenses: Expense[], newCardName: string | null, cardId: number) {
+    if (expenses.length === 0) {
+        throw invalidCredentialsError("Nenhuma despesa fornecida para atualização.");
+    }
+    const updateexpenses = await expensesRepository.updateExpesesPut(expenses, newCardName, cardId);
 
     return updateexpenses;
 }

@@ -1,4 +1,5 @@
 import prisma from "@/database/database";
+import { Expense } from "@/protocols";
 
 async function addexpensesPost(monthId: number, containers: any[]) {
 
@@ -54,7 +55,36 @@ async function deleteExpensesDelete(id: number) {
     return expense
 }
 
+async function updateExpesesPut(expenses: Expense[], newCardName: string | null, cardId: number) {
+    if (newCardName) {
+        await prisma.card.update({
+            where: {
+                id: cardId, 
+            },
+            data: {
+                name: newCardName, 
+            },
+        });
+    }
+    const updatedExpenses = await Promise.all(
+        expenses.map(async (expense) => {
+            return await prisma.expense.update({
+                where: {
+                    id: expense.id, 
+                },
+                data: {
+                    value: expense.value, 
+                    name: expense.name,
+                    person: expense.person   
+                },
+            });
+        })
+    );
+
+    return updatedExpenses;
+}
+
 
 export const expensesRepository = {
-    addexpensesPost, expenseExists, deleteExpensesDelete
+    addexpensesPost, expenseExists, deleteExpensesDelete, updateExpesesPut
 };
