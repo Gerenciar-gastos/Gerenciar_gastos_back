@@ -1,4 +1,5 @@
 import { invalidCredentialsError } from "@/erros/invalidCredentialsError";
+import { Expense } from "@/protocols";
 import { expensesRepository } from "@/repositories/expensesRepository";
 
 
@@ -17,7 +18,15 @@ async function deleteExpensesDelete(id: number) {
     }
 }
 
+async function updateExpesesPut(expenses: Expense[], newCardName: string | null) {
+    
+    const updateexpenses = await expensesRepository.updateExpesesPut(expenses, newCardName);
+
+    return updateexpenses;
+}
+
+
 
 export const expensesService = {
-    addexpensesPost, deleteExpensesDelete
+    addexpensesPost, deleteExpensesDelete, updateExpesesPut
 };

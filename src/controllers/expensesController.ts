@@ -19,6 +19,7 @@ async function deleteExpensesDelete(req: Request, res: Response) {
 async function updateExpesesPut(req: Request, res: Response) {
     const { expenses, newCardName } = req.body; 
     const updateexpenses = await expensesService.updateExpesesPut(expenses, newCardName);
+    console.log("despesas",expenses)
 
     res.status(httpStatus.OK).send(updateexpenses);
 }
