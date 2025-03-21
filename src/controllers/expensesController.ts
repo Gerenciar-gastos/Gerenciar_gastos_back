@@ -16,6 +16,13 @@ async function deleteExpensesDelete(req: Request, res: Response) {
     res.status(httpStatus.OK).send(expenses);
 }
 
+async function updateExpesesPut(req: Request, res: Response) {
+    const { expenses, newCardName } = req.body; 
+    const updateexpenses = await expensesService.updateExpesesPut(expenses, newCardName);
+
+    res.status(httpStatus.OK).send(updateexpenses);
+}
+
 export const expensesController = {
-    addexpensesPost, deleteExpensesDelete
+    addexpensesPost, deleteExpensesDelete, updateExpesesPut
 };
