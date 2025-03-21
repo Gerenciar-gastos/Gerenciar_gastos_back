@@ -10,5 +10,6 @@ const expensesRouter = Router();
 expensesRouter
     .post('/', authenticateToken, validateBody(validatePurchases), expensesController.addexpensesPost)
     .delete('/:id', authenticateToken, expensesController.deleteExpensesDelete)
+    .put('/', authenticateToken, expensesController.updateExpesesPut )
 
 export { expensesRouter };

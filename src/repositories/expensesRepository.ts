@@ -33,7 +33,6 @@ async function addexpensesPost(monthId: number, containers: any[]) {
             expenses: createdExpenses,
         });
     }
-    console.log(createdCards)
     return createdCards;
 }
 
