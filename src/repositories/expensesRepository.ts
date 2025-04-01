@@ -73,7 +73,7 @@ async function updateExpesesPut(expenses: Expense[], newCardName: string | null,
                     id: expense.id, 
                 },
                 data: {
-                    value: expense.value, 
+                    value: Number(expense.value), 
                     name: expense.name,
                     person: expense.person   
                 },
